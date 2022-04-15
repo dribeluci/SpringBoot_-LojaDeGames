@@ -1,17 +1,19 @@
 package com.generation.LojaDeGames.Model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -23,27 +25,36 @@ public class Produto {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private Long id;
 	
-	@NotBlank(message = "Nome é obrigatório")                                       										
+	@NotNull(message = "Nome é obrigatório!")                                       										
 	private String nome;
 	
 	@Size(max=500)
 	private String descricao;
 	
-	@NotBlank(message = "O Console é obrigatório")
+	@NotNull(message = "Console é obrigatório!")
 	private String console;
 	
 	private int quantidade;
 	
-	
-	@JsonFormat(pattern = "yyyy-MM-dd") // essa anotação é para deixar a data no formato correto
+	@Column(name = "data_lancamento")
+	@JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dataLancamento;
 	
-	
-	@NotNull(message = "O preço é obrigatório")
-	
-	private double preco;
+	@JsonFormat(shape = JsonFormat.Shape.STRING)
+	@NotNull(message = "Preço é obrigatório!")
+	@Positive(message = "O preço deve ser maior do que zero!")
+	private BigDecimal preco;
 	
 	private String foto;
+
+	/**
+	 * A anotação @Column além de renomear um atributo no Banco de dados,
+	 * também permite definir um valor padrão (default), através da propriedade
+	 * columnDefinition, onde deve ser informado o tipo do atributo (em nosso
+	 * exemplo integer) e o valor padrão (em nosso exemplo 0)
+	 */
+	@Column(columnDefinition = "integer default 0")
+	private int curtir;
 
 	@ManyToOne
 	@JsonIgnoreProperties("produto")
@@ -90,11 +101,11 @@ public class Produto {
 		this.quantidade = quantidade;
 	}
 
-	public double getPreco() {
+	public BigDecimal getPreco() {
 		return preco;
 	}
 
-	public void setPreco(double preco) {
+	public void setPreco(BigDecimal preco) {
 		this.preco = preco;
 	}
 
@@ -112,6 +123,14 @@ public class Produto {
 
 	public void setDataLancamento(LocalDate dataLancamento) {
 		this.dataLancamento = dataLancamento;
+	}
+
+	public int getCurtir() {
+		return this.curtir;
+	}
+
+	public void setCurtir(int curtir) {
+		this.curtir = curtir;
 	}
 
 	public Categoria getCategoria() {

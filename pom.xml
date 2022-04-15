@@ -5,16 +5,17 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.6.6</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<version>2.6.3</version>
+		<relativePath/>
+		<!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>Loja_de_games</artifactId>
+	<groupId>br.org.generation</groupId>
+	<artifactId>lojagames</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Loja_de_games</name>
-	<description>Demo project for Spring Boot</description>
+	<name>lojagames</name>
+	<description>Loja de Games - Generations</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -29,7 +30,17 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		<!-- Dependência Spring Security -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
 
+		<!-- Dependência para Codificação do Token -->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -56,5 +67,6 @@
 			</plugin>
 		</plugins>
 	</build>
+
 
 </project>

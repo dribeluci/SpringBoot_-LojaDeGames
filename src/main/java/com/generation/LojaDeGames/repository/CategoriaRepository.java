@@ -1,8 +1,10 @@
 package com.generation.LojaDeGames.repository;
 
 import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
-import br.org.generation.lojagames.model.Categoria;
+
+import com.generation.LojaDeGames.Model.Categoria;
 
 public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
 	
